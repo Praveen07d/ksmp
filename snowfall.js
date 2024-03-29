@@ -18,7 +18,17 @@ function createSnowflake() {
     snowflake.style.borderRadius = '50%';
     snowflake.style.filter = 'blur(2px)'; // Adding a blur for the glow effect
     snowflake.style.zIndex = '9999'; // Ensure snowflakes are above other elements
+    snowflake.style.transition = 'filter 0.5s'; // Smooth transition for glow effect
     document.body.appendChild(snowflake);
+
+    // Add mouse hover event listener
+    snowflake.addEventListener('mouseover', function() {
+        this.style.filter = 'blur(5px)'; // Increase blur for glow effect on hover
+    });
+
+    snowflake.addEventListener('mouseout', function() {
+        this.style.filter = 'blur(2px)'; // Reset blur on mouse out
+    });
 
     return snowflake;
 }

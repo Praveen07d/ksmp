@@ -1,10 +1,16 @@
-document.addEventListener('DOMContentLoaded', function() {
-    const numSnowflakes = 50; // Number of snowflakes
-    const container = document.body; // Container to append snowflakes
+// snowfall.js
 
-    for (let i = 0; i < numSnowflakes; i++) {
-        const snowflake = document.createElement('div');
-        snowflake.className = 'snowflake';
-        container.appendChild(snowflake);
+document.addEventListener('DOMContentLoaded', function() {
+    const numFlakes = 50;
+    const flakesContainer = document.body;
+    
+    for (let i = 0; i < numFlakes; i++) {
+        const flake = document.createElement('div');
+        flake.classList.add('snowflake');
+        flakesContainer.appendChild(flake);
+        
+        flake.style.left = `${Math.random() * 100}vw`;
+        flake.style.animationDuration = `${Math.random() * 3 + 2}s`;
+        flake.style.animationDelay = `${Math.random()}s`;
     }
 });

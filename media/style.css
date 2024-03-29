@@ -1,25 +1,27 @@
-/* Snowfall Animation */
-@keyframes snowfall {
-    0% {
-        transform: translateY(-10%);
-    }
-    100% {
-        transform: translateY(100vh);
-    }
+/* media/style.css */
+
+body {
+    overflow: hidden; /* Prevents the snowflakes from overflowing the viewport */
 }
 
 .snowflake {
     position: fixed;
-    top: -10%;
-    left: calc(10% + 90vw * random());
-    width: 2px;
-    height: 2px;
-    background-color: #fff;
-    opacity: 0.8;
-    animation: snowfall 10s linear infinite, drift 3s ease-in-out infinite alternate;
-    animation-delay: calc(5s * random());
+    top: -10px; /* Start position */
+    z-index: 1000; /* Ensures the snowflakes stay on top of other content */
+    width: 10px;
+    height: 10px;
+    background: white;
     border-radius: 50%;
-    z-index: 1;
+    animation: snowfall linear infinite;
+}
+
+@keyframes snowfall {
+    0% {
+        transform: translateY(-10px) rotate(0deg);
+    }
+    100% {
+        transform: translateY(100vh) rotate(360deg);
+    }
 }
 
 /* Optional Drift Animation */

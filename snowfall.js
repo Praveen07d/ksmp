@@ -1,69 +1,25 @@
-// snowfall.js
+/* media/style.css */
 
-// Function to generate random number within a range
-function randomRange(min, max) {
-    return Math.random() * (max - min) + min;
+body {
+    overflow: hidden; /* Prevents the snowflakes from overflowing the viewport */
 }
 
-// Create a snowflake
-function createSnowflake() {
-    const snowflake = document.createElement('div');
-    snowflake.classList.add('snowflake');
-    snowflake.style.position = 'fixed';
-    snowflake.style.top = '-10px'; // Start above the viewport
-    snowflake.style.left = `${randomRange(0, window.innerWidth)}px`; // Random horizontal position
-    snowflake.style.width = '10px';
-    snowflake.style.height = '10px';
-    snowflake.style.background = 'rgba(255, 255, 255, 0.8)'; // White with slight transparency
-    snowflake.style.borderRadius = '50%';
-    snowflake.style.filter = 'blur(2px)'; // Adding a blur for the glow effect
-    snowflake.style.zIndex = '9999'; // Ensure snowflakes are above other elements
-    snowflake.style.transition = 'filter 0.5s'; // Smooth transition for glow effect
-    document.body.appendChild(snowflake);
-
-    // Add mouse hover event listener
-    snowflake.addEventListener('mouseover', function() {
-        this.style.filter = 'blur(5px)'; // Increase blur for glow effect on hover
-    });
-
-    snowflake.addEventListener('mouseout', function() {
-        this.style.filter = 'blur(2px)'; // Reset blur on mouse out
-    });
-
-    return snowflake;
+.snowflake {
+    position: fixed;
+    top: -10px; /* Start position */
+    z-index: 1000; /* Ensures the snowflakes stay on top of other content */
+    width: 10px;
+    height: 10px;
+    background: white;
+    border-radius: 50%;
+    animation: snowfall linear infinite;
 }
 
-// Make snowflakes fall
-function snowfall() {
-    const snowflakes = [];
-
-    // Create 50 snowflakes
-    for (let i = 0; i < 50; i++) {
-        const snowflake = createSnowflake();
-        snowflakes.push(snowflake);
+@keyframes snowfall {
+    0% {
+        transform: translateY(-10px) rotate(0deg);
     }
-
-    // Make the snowflakes fall
-    function animateSnowflakes() {
-        snowflakes.forEach((snowflake, index) => {
-            const x = parseFloat(snowflake.style.left);
-            const y = parseFloat(snowflake.style.top);
-
-            snowflake.style.top = `${y + randomRange(1, 3)}px`; // Fall speed
-            snowflake.style.left = `${x + Math.sin(y / 50) * 2}px`; // Horizontal movement
-
-            // If snowflake goes below the viewport, reset its position
-            if (y > window.innerHeight) {
-                snowflake.style.top = '-10px';
-                snowflake.style.left = `${randomRange(0, window.innerWidth)}px`;
-            }
-        });
-
-        requestAnimationFrame(animateSnowflakes);
+    100% {
+        transform: translateY(100vh) rotate(360deg);
     }
-
-    animateSnowflakes();
 }
-
-// Start snowfall
-snowfall();

@@ -1,3 +1,37 @@
+/* Snowfall Animation */
+@keyframes snowfall {
+    0% {
+        transform: translateY(-10%);
+    }
+    100% {
+        transform: translateY(100vh);
+    }
+}
+
+.snowflake {
+    position: fixed;
+    top: -10%;
+    left: calc(10% + 90vw * random());
+    width: 2px;
+    height: 2px;
+    background-color: #fff;
+    opacity: 0.8;
+    animation: snowfall 10s linear infinite, drift 3s ease-in-out infinite alternate;
+    animation-delay: calc(5s * random());
+    border-radius: 50%;
+    z-index: 1;
+}
+
+/* Optional Drift Animation */
+@keyframes drift {
+    0%, 100% {
+        transform: translateX(0);
+    }
+    50% {
+        transform: translateX(5px);
+    }
+}
+
 :root {
     --nice-padding: 6rem;
     --roundness: 0.75rem;
